@@ -3,11 +3,11 @@
 ## install dep
 
 ```script
-yarn  
+cd admin && yarn  
 ```
 
 ## run for Development
 
 ```script
-yarn dev
+cd admin && yarn dev
 ```
