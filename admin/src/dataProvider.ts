@@ -189,10 +189,31 @@ export const dataProvider = {
     });
   },
 
-  delete: (resource: any, params: any) =>
-    httpClient(`${apiUrl}/${resource}/${params.id}`, {
-      method: "DELETE",
-    }).then(({ json }) => ({ data: json })),
+  delete: (resource: any, params: any) => {
+    // httpClient(`${apiUrl}/${resource}/${params.id}`, {
+    //   method: "DELETE",
+    // }).then(({ json }) => ({ data: json })),
+    const url = `${apiUrl}/${resource}/delete`;
+    return axios({
+      method: 'post',
+      data: {
+        id: params.id
+      },
+      headers: {
+        "x-access-token": localStorage.getItem("access_token"),
+      },
+      url,
+    }).then(res => {
+      if(res?.data?.code == 1 ) {
+        return {
+          id: params.id
+        }
+      } else {
+        throw Error('Error')
+      }
+    })
+  },
+    
 
   deleteMany: (resource: any, params: any) => {
     const query = {
