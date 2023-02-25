@@ -5,6 +5,35 @@ import { stringify } from "query-string";
 const apiUrl = "http://35.154.165.33:9000/api";
 const httpClient = fetchUtils.fetchJson;
 
+const getMany = (resource: any, params: any, id: any, returnArray = false) => {
+  let resourceUrl = resource;
+  let data = {
+    id: id,
+  };
+  if (resource == "package") {
+    resourceUrl = "package/id";
+  } else if (resource == "country") {
+    resourceUrl = "country/id";
+  }
+  const url = `${apiUrl}/${resourceUrl}`;
+  return axios({
+    method: "post",
+    headers: {
+      "x-access-token": localStorage.getItem("access_token"),
+    },
+    data,
+    url,
+  }).then((res) => {
+    if (res?.data?.code == 1) {
+      return {
+        data: returnArray ? [res.data.data] : res.data.data,
+      };
+    } else {
+      throw Error("SOmething Went Wrong! ");
+    }
+  });
+};
+
 // TypeScript users must reference the type `DataProvider`
 export const dataProvider = {
   getList: (resource: any, params: any) => {
@@ -60,56 +89,8 @@ export const dataProvider = {
     });
   },
 
-  getOne: (resource: any, params: any) => {
-    let resourceUrl = resource;
-    let data = {
-      id: params.id,
-    };
-    if (resource == "package") {
-      resourceUrl = "package/id";
-    }
-    const url = `${apiUrl}/${resourceUrl}`;
-    return axios({
-      method: "post",
-      headers: {
-        "x-access-token": localStorage.getItem("access_token"),
-      },
-      data,
-      url,
-    }).then((res) => {
-      if (res?.data?.code == 1) {
-        return res.data.data;
-      } else {
-        throw Error("SOmething Went Wrong! ");
-      }
-    });
-  },
-  getMany: (resource: any, params: any) => {
-    let resourceUrl = resource;
-    let data = {
-      id: params.ids[0],
-    };
-    if (resource == "package") {
-      resourceUrl = "package/id";
-    }
-    const url = `${apiUrl}/${resourceUrl}`;
-    return axios({
-      method: "post",
-      headers: {
-        "x-access-token": localStorage.getItem("access_token"),
-      },
-      data,
-      url,
-    }).then((res) => {
-      if (res?.data?.code == 1) {
-        return {
-          data: [res.data.data],
-        };
-      } else {
-        throw Error("SOmething Went Wrong! ");
-      }
-    });
-  },
+  getOne: (resource: any, params: any) => getMany(resource, params, params.id),
+  getMany: (r: any, params: any) => getMany(r, params, params.ids[0], true),
 
   getManyReference: (resource: any, params: any) => {
     console.log("getManyReference");
@@ -134,11 +115,35 @@ export const dataProvider = {
     }));
   },
 
-  update: (resource: any, params: any) =>
-    httpClient(`${apiUrl}/${resource}/${params.id}`, {
-      method: "PUT",
-      body: JSON.stringify(params.data),
-    }).then(({ json }) => ({ data: json })),
+  update: (resource: any, params: any) => {
+    // httpClient(`${apiUrl}/${resource}/${params.id}`, {
+    //   method: "PUT",
+    //   body: JSON.stringify(params.data),
+    // }).then(({ json }) => ({ data: json })),??
+    const url = `${apiUrl}/${resource}/update`;
+    return axios({
+      method: "post",
+      url,
+      headers: {
+        "x-access-token": localStorage.getItem("access_token"),
+      },
+      data: {
+        id: params.id,
+        ...params.data,
+      },
+    }).then((res) => {
+      if (res?.data?.code == 1) {
+        return {
+          data: {
+            ...params.data,
+            id: params.id,
+          },
+        };
+      } else {
+        throw Error("Something went Wrong !");
+      }
+    });
+  },
 
   updateMany: (resource: any, params: any) => {
     const query = {
@@ -150,13 +155,39 @@ export const dataProvider = {
     }).then(({ json }) => ({ data: json }));
   },
 
-  create: (resource: any, params: any) =>
-    httpClient(`${apiUrl}/${resource}`, {
-      method: "POST",
-      body: JSON.stringify(params.data),
-    }).then(({ json }) => ({
-      data: { ...params.data, id: json.id },
-    })),
+  create: (resource: any, params: any) => {
+    // return httpClient(`${apiUrl}/${resource}`, {
+    //   method: "POST",
+    //   body: JSON.stringify(params.data),
+    // }).then(({ json }) => ({
+    //   data: { ...params.data, id: json.id },
+    // })),
+    let resourceUrl = resource;
+    let data = params.data;
+    if (resource == "country") {
+      resourceUrl = "country/add";
+    }
+    const url = `${apiUrl}/${resourceUrl}`;
+    return axios({
+      method: "post",
+      headers: {
+        "x-access-token": localStorage.getItem("access_token"),
+      },
+      data,
+      url,
+    }).then((res) => {
+      if (res?.data?.code == 1) {
+        return {
+          data: {
+            ...params.data,
+            id: Math.random(),
+          },
+        };
+      } else {
+        throw Error("Error");
+      }
+    });
+  },
 
   delete: (resource: any, params: any) =>
     httpClient(`${apiUrl}/${resource}/${params.id}`, {
