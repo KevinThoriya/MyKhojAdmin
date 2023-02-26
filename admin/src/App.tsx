@@ -8,6 +8,7 @@ import { CreateCity } from "./Create/CreateCity";
 import { CreateCountry } from "./Create/CreateCountry";
 import { CreatePinCode } from "./Create/CreatePinCode";
 import { CreateState } from "./Create/CreateState";
+import { CreateSubCategory } from "./Create/CreateSubCategory";
 import { CustomerList } from "./List/CustomerList";
 import { DesList } from "./List/DesList";
 import { EditArea } from "./Edit/EditArea";
@@ -16,6 +17,7 @@ import { EditCity } from "./Edit/EditCity";
 import { EditCountry } from "./Edit/EditCountry";
 import { EditPinCode } from "./Edit/EditPinCode";
 import { EditState } from "./Edit/EditState";
+import { EditSubCategory } from "./Edit/EditSubCategory";
 import { ListArea } from "./List/ListArea";
 import { ListCity } from "./List/ListCity";
 import { ListCountry } from "./List/ListCountry";
@@ -87,6 +89,7 @@ const App = () => {
         name="category"
         list={CategoryList}
         create={CreateCategory}
+        recordRepresentation={(record) => `${record.name}`}
         edit={EditCategory}
         options={{
           label: "Category",
@@ -96,6 +99,8 @@ const App = () => {
         name="subCategory"
         recordRepresentation={(record) => `${record.name}`}
         list={SubCategoryList}
+        create={CreateSubCategory}
+        edit={EditSubCategory}
         options={{
           label: "Sub Category",
         }}
