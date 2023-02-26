@@ -2,16 +2,19 @@ import { Admin, ListGuesser, Resource } from "react-admin";
 
 import { CategoryList } from "./List/CategoryList";
 import { ComSubList } from "./List/ComSubList";
+import { CreateArea } from "./Create/CreateArea";
 import { CreateCity } from "./Create/CreateCity";
 import { CreateCountry } from "./Create/CreateCountry";
 import { CreatePinCode } from './Create/CreatePinCode';
 import { CreateState } from "./Create/CreateState";
 import { CustomerList } from "./List/CustomerList";
 import { DesList } from "./List/DesList";
+import { EditArea } from "./Edit/EditArea";
 import { EditCity } from './Edit/EditCity';
 import { EditCountry } from "./Edit/EditCountry";
 import { EditPinCode } from './Edit/EditPinCode';
 import { EditState } from "./Edit/EditState";
+import { ListArea } from "./List/ListArea";
 import { ListCity } from "./List/ListCity";
 import { ListCountry } from './List/ListCountry';
 import { ListPinCode } from './List/ListPinCode';
@@ -63,9 +66,19 @@ const App = () => {
         list={ListPinCode}
         create={CreatePinCode}
         edit={EditPinCode}
-        recordRepresentation={(record) => `${record.name}`}
+        recordRepresentation={(record) => `${record.code}`}
         options={{
           label: "Pincode",
+        }}
+      />
+       <Resource
+        name="area"
+        list={ListArea}
+        create={CreateArea}
+        edit={EditArea}
+        recordRepresentation={(record) => `${record.name}`}
+        options={{
+          label: "Area",
         }}
       />
       <Resource
