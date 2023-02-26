@@ -4,14 +4,17 @@ import { CategoryList } from "./List/CategoryList";
 import { ComSubList } from "./List/ComSubList";
 import { CreateCity } from "./Create/CreateCity";
 import { CreateCountry } from "./Create/CreateCountry";
+import { CreatePinCode } from './Create/CreatePinCode';
 import { CreateState } from "./Create/CreateState";
 import { CustomerList } from "./List/CustomerList";
 import { DesList } from "./List/DesList";
 import { EditCity } from './Edit/EditCity';
 import { EditCountry } from "./Edit/EditCountry";
+import { EditPinCode } from './Edit/EditPinCode';
 import { EditState } from "./Edit/EditState";
 import { ListCity } from "./List/ListCity";
 import { ListCountry } from './List/ListCountry';
+import { ListPinCode } from './List/ListPinCode';
 import { ListState } from "./List/ListState";
 import { PackageList } from "./List/PackageList";
 import { SubCategoryList } from "./List/SubCategoryList";
@@ -53,6 +56,16 @@ const App = () => {
         recordRepresentation={(record) => `${record.name}`}
         options={{
           label: "City",
+        }}
+      />
+      <Resource
+        name="pincode"
+        list={ListPinCode}
+        create={CreatePinCode}
+        edit={EditPinCode}
+        recordRepresentation={(record) => `${record.name}`}
+        options={{
+          label: "Pincode",
         }}
       />
       <Resource
