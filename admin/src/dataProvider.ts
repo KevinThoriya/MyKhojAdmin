@@ -1,20 +1,17 @@
-import axios from "axios";
-import { fetchUtils } from "react-admin";
+import { DataProvider, LegacyDataProvider, fetchUtils } from "react-admin";
+import axios, { AxiosError } from "axios";
+
+import { HttpError } from "react-admin";
 import { stringify } from "query-string";
 
 const apiUrl = "http://35.154.165.33:9000/api";
 const httpClient = fetchUtils.fetchJson;
 
-const getMany = (resource: any, params: any, id: any, returnArray = false) => {
-  let resourceUrl = resource;
+const getMany = (resource: any, id: any) => {
+  let resourceUrl = resource + "/id";
   let data = {
     id: id,
   };
-  if (resource == "package") {
-    resourceUrl = "package/id";
-  } else if (resource == "country") {
-    resourceUrl = "country/id";
-  }
   const url = `${apiUrl}/${resourceUrl}`;
   return axios({
     method: "post",
@@ -26,7 +23,7 @@ const getMany = (resource: any, params: any, id: any, returnArray = false) => {
   }).then((res) => {
     if (res?.data?.code == 1) {
       return {
-        data: returnArray ? [res.data.data] : res.data.data,
+        data: res.data.data,
       };
     } else {
       throw Error("SOmething Went Wrong! ");
@@ -35,7 +32,7 @@ const getMany = (resource: any, params: any, id: any, returnArray = false) => {
 };
 
 // TypeScript users must reference the type `DataProvider`
-export const dataProvider = {
+export const dataProvider: DataProvider | LegacyDataProvider = {
   getList: (resource: any, params: any) => {
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
@@ -44,39 +41,14 @@ export const dataProvider = {
       range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
       filter: JSON.stringify(params.filter),
     };
-
-    let data = {};
-    let resourceUrl = resource;
-    if (resource == "country") {
-      data = {
-        name: "INDIA",
-        countryCode: "IN",
-        nationality: "INDIAN",
-      };
-      resourceUrl = "country/fetchall";
-    } else if (resource == "category") {
-      resourceUrl = "category/fetchall";
-    } else if (resource == "sc") {
-      resourceUrl = "sc/fetchall";
-    } else if (resource == "catfield") {
-      resourceUrl = "catfield/all";
-    } else if (resource == "comsub") {
-      resourceUrl = "comsub/all";
-    } else if (resource == "des") {
-      resourceUrl = "des/fetch";
-    } else if (resource == "customer") {
-      resourceUrl = "customer/all";
-    } else if (resource == "package") {
-      resourceUrl = "package/all";
-    }
+    let resourceUrl = resource + "/all";
     const url = `${apiUrl}/${resourceUrl}?${stringify(query)}`;
     return axios({
-      method: "post",
+      method: "get",
       url,
       headers: {
         "x-access-token": localStorage.getItem("access_token"),
       },
-      data,
     }).then((res) => {
       if (res?.data?.code == 1) {
         return {
@@ -89,8 +61,17 @@ export const dataProvider = {
     });
   },
 
-  getOne: (resource: any, params: any) => getMany(resource, params, params.id),
-  getMany: (r: any, params: any) => getMany(r, params, params.ids[0], true),
+  getOne: (resource: any, params: any) => getMany(resource, params.id),
+  getMany: async (resource: any, params: any) => {
+    const res = await Promise.allSettled(
+      params.ids.map((id: number) => getMany(resource, id))
+    ).then((res) => {
+      return {
+        data: res.map((r) => (r.status == "fulfilled" ? r.value.data : {})),
+      };
+    });
+    return res;
+  },
 
   getManyReference: (resource: any, params: any) => {
     console.log("getManyReference");
@@ -116,10 +97,6 @@ export const dataProvider = {
   },
 
   update: (resource: any, params: any) => {
-    // httpClient(`${apiUrl}/${resource}/${params.id}`, {
-    //   method: "PUT",
-    //   body: JSON.stringify(params.data),
-    // }).then(({ json }) => ({ data: json })),??
     const url = `${apiUrl}/${resource}/update`;
     return axios({
       method: "post",
@@ -156,17 +133,8 @@ export const dataProvider = {
   },
 
   create: (resource: any, params: any) => {
-    // return httpClient(`${apiUrl}/${resource}`, {
-    //   method: "POST",
-    //   body: JSON.stringify(params.data),
-    // }).then(({ json }) => ({
-    //   data: { ...params.data, id: json.id },
-    // })),
-    let resourceUrl = resource;
+    let resourceUrl = resource + "/add";
     let data = params.data;
-    if (resource == "country") {
-      resourceUrl = "country/add";
-    }
     const url = `${apiUrl}/${resourceUrl}`;
     return axios({
       method: "post",
@@ -194,26 +162,30 @@ export const dataProvider = {
     //   method: "DELETE",
     // }).then(({ json }) => ({ data: json })),
     const url = `${apiUrl}/${resource}/delete`;
-    return axios({
-      method: 'post',
-      data: {
-        id: params.id
-      },
-      headers: {
-        "x-access-token": localStorage.getItem("access_token"),
-      },
-      url,
-    }).then(res => {
-      if(res?.data?.code == 1 ) {
-        return {
-          id: params.id
+    return new Promise((resolve,reject)=> {
+       axios({
+        method: "post",
+        data: {
+          id: params.id,
+        },
+        headers: {
+          "x-access-token": localStorage.getItem("access_token"),
+        },
+        url,
+      }).then((res) => {
+        if (res?.data?.code == 1) {
+          return resolve({
+            id: params.id,
+            ...params,
+          });
+        } else {
+          console.log("error");
+          return reject(res?.data?.message || "Error");
+          return reject(new HttpError(res?.data?.message || "Error", res.status, res)); //new HttpError(res?.data?.message || "Error", 400, res?.data));
         }
-      } else {
-        throw Error('Error')
-      }
+      });
     })
   },
-    
 
   deleteMany: (resource: any, params: any) => {
     const query = {

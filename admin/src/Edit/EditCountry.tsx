@@ -21,7 +21,7 @@ export const EditCountry = () => {
     refresh();
   };
   return (
-    <Edit mutationMode="optimistic" mutationOptions={{ onSuccess }}>
+    <Edit mutationMode="pessimistic">
       <SimpleForm>
         <TextInput source="name" validate={[required()]} fullWidth />
       </SimpleForm>

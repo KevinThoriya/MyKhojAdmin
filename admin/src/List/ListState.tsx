@@ -1,17 +1,15 @@
 import { Datagrid, List, ReferenceField, TextField } from "react-admin";
 
-export const SubCategoryList = () => {
+export const ListState = () => {
   return (
     <List>
       <Datagrid rowClick="edit">
         <TextField source="id" />
         <TextField source="name" />
-        <TextField source="status" />
-        <ReferenceField source="cat_id" reference="category" label="Parent Category">
+        {/* <TextField source="co_id" /> */}
+        <ReferenceField source="co_id" reference="country" label="Country">
           <TextField source="name" />
         </ReferenceField>
-
-        
       </Datagrid>
     </List>
   );
