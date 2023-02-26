@@ -3,21 +3,23 @@ import { Admin, ListGuesser, Resource } from "react-admin";
 import { CategoryList } from "./List/CategoryList";
 import { ComSubList } from "./List/ComSubList";
 import { CreateArea } from "./Create/CreateArea";
+import { CreateCategory } from "./Create/CreateCategory";
 import { CreateCity } from "./Create/CreateCity";
 import { CreateCountry } from "./Create/CreateCountry";
-import { CreatePinCode } from './Create/CreatePinCode';
+import { CreatePinCode } from "./Create/CreatePinCode";
 import { CreateState } from "./Create/CreateState";
 import { CustomerList } from "./List/CustomerList";
 import { DesList } from "./List/DesList";
 import { EditArea } from "./Edit/EditArea";
-import { EditCity } from './Edit/EditCity';
+import { EditCategory } from "./Edit/EditCategory";
+import { EditCity } from "./Edit/EditCity";
 import { EditCountry } from "./Edit/EditCountry";
-import { EditPinCode } from './Edit/EditPinCode';
+import { EditPinCode } from "./Edit/EditPinCode";
 import { EditState } from "./Edit/EditState";
 import { ListArea } from "./List/ListArea";
 import { ListCity } from "./List/ListCity";
-import { ListCountry } from './List/ListCountry';
-import { ListPinCode } from './List/ListPinCode';
+import { ListCountry } from "./List/ListCountry";
+import { ListPinCode } from "./List/ListPinCode";
 import { ListState } from "./List/ListState";
 import { PackageList } from "./List/PackageList";
 import { SubCategoryList } from "./List/SubCategoryList";
@@ -71,7 +73,7 @@ const App = () => {
           label: "Pincode",
         }}
       />
-       <Resource
+      <Resource
         name="area"
         list={ListArea}
         create={CreateArea}
@@ -84,6 +86,8 @@ const App = () => {
       <Resource
         name="category"
         list={CategoryList}
+        create={CreateCategory}
+        edit={EditCategory}
         options={{
           label: "Category",
         }}
