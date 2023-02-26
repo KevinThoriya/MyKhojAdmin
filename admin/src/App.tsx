@@ -2,12 +2,15 @@ import { Admin, ListGuesser, Resource } from "react-admin";
 
 import { CategoryList } from "./List/CategoryList";
 import { ComSubList } from "./List/ComSubList";
+import { CreateCity } from "./Create/CreateCity";
 import { CreateCountry } from "./Create/CreateCountry";
 import { CreateState } from "./Create/CreateState";
 import { CustomerList } from "./List/CustomerList";
 import { DesList } from "./List/DesList";
+import { EditCity } from './Edit/EditCity';
 import { EditCountry } from "./Edit/EditCountry";
 import { EditState } from "./Edit/EditState";
+import { ListCity } from "./List/ListCity";
 import { ListCountry } from './List/ListCountry';
 import { ListState } from "./List/ListState";
 import { PackageList } from "./List/PackageList";
@@ -40,6 +43,16 @@ const App = () => {
         recordRepresentation={(record) => `${record.name}`}
         options={{
           label: "State",
+        }}
+      />
+      <Resource
+        name="city"
+        list={ListCity}
+        create={CreateCity}
+        edit={EditCity}
+        recordRepresentation={(record) => `${record.name}`}
+        options={{
+          label: "City",
         }}
       />
       <Resource
