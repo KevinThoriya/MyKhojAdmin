@@ -1,5 +1,8 @@
 import { Admin, ListGuesser, Resource } from "react-admin";
 
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import AccessibilityIcon from "@mui/icons-material/Accessibility";
+import AdUnitsIcon from "@mui/icons-material/AdUnits";
 import { CategoryList } from "./List/CategoryList";
 import { ComSubList } from "./List/ComSubList";
 import { CreateArea } from "./Create/CreateArea";
@@ -23,8 +26,13 @@ import { ListCity } from "./List/ListCity";
 import { ListCountry } from "./List/ListCountry";
 import { ListPinCode } from "./List/ListPinCode";
 import { ListState } from "./List/ListState";
+import LocalActivityIcon from "@mui/icons-material/LocalActivity";
+import LocalAirportIcon from "@mui/icons-material/LocalAirport";
+import LocationIcon from "@mui/icons-material/LocationCity";
 import { PackageList } from "./List/PackageList";
+import PhoneCallbackSharpIcon from "@mui/icons-material/PhoneCallbackSharp";
 import { SubCategoryList } from "./List/SubCategoryList";
+import UserIcon from "@mui/icons-material/People";
 import { authProvider } from "./authProvider";
 import { dataProvider } from "./dataProvider";
 
@@ -40,6 +48,7 @@ const App = () => {
         list={ListCountry}
         create={CreateCountry}
         edit={EditCountry}
+        icon={AdUnitsIcon}
         recordRepresentation={(record) => `${record.name}`}
         options={{
           label: "Country",
@@ -50,6 +59,7 @@ const App = () => {
         list={ListState}
         create={CreateState}
         edit={EditState}
+        icon={LocalActivityIcon}
         recordRepresentation={(record) => `${record.name}`}
         options={{
           label: "State",
@@ -61,6 +71,7 @@ const App = () => {
         create={CreateCity}
         edit={EditCity}
         recordRepresentation={(record) => `${record.name}`}
+        icon={LocationIcon}
         options={{
           label: "City",
         }}
@@ -70,6 +81,7 @@ const App = () => {
         list={ListPinCode}
         create={CreatePinCode}
         edit={EditPinCode}
+        icon={LocalAirportIcon}
         recordRepresentation={(record) => `${record.code}`}
         options={{
           label: "Pincode",
@@ -91,6 +103,7 @@ const App = () => {
         create={CreateCategory}
         recordRepresentation={(record) => `${record.name}`}
         edit={EditCategory}
+        icon={AccessTimeIcon}
         options={{
           label: "Category",
         }}
@@ -101,6 +114,7 @@ const App = () => {
         list={SubCategoryList}
         create={CreateSubCategory}
         edit={EditSubCategory}
+        icon={AccessibilityIcon}
         options={{
           label: "Sub Category",
         }}
@@ -123,6 +137,7 @@ const App = () => {
       <Resource
         name="des"
         list={DesList}
+        icon={PhoneCallbackSharpIcon}
         recordRepresentation={(record) => `${record.name}`}
         options={{
           label: "Designation",
@@ -132,6 +147,7 @@ const App = () => {
         name="customer"
         list={CustomerList}
         recordRepresentation={(record) => `${record.name}`}
+        icon={UserIcon}
         options={{
           label: "Customer",
         }}
@@ -139,6 +155,7 @@ const App = () => {
       <Resource
         name="package"
         list={PackageList}
+        icon={AccessibilityIcon}
         recordRepresentation={(record) => `${record.name}`}
         options={{
           label: "Package",
