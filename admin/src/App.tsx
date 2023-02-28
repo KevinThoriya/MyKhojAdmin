@@ -15,8 +15,14 @@ import { CompanyList } from "./List/CompanyList";
 import { CompanySubCategoryList } from "./List/CompanySubCategoryList";
 import { CreateArea } from "./Create/CreateArea";
 import { CreateCategory } from "./Create/CreateCategory";
+import { CreateCategoryField } from "./Create/CreatCategoryField";
 import { CreateCity } from "./Create/CreateCity";
+import { CreateCompany } from "./Create/CreateCompany";
+import { CreateCompanySubCategory } from "./Create/CreateCompanySubCategory";
 import { CreateCountry } from "./Create/CreateCountry";
+import { CreateCustomer } from "./Create/CreateCustomer";
+import { CreateDesignation } from "./Create/CreateDesignation";
+import { CreatePackage } from "./Create/CreatePackage";
 import { CreatePinCode } from "./Create/CreatePinCode";
 import { CreateState } from "./Create/CreateState";
 import { CreateSubCategory } from "./Create/CreateSubCategory";
@@ -24,8 +30,14 @@ import { CustomerList } from "./List/CustomerList";
 import { DesList } from "./List/DesList";
 import { EditArea } from "./Edit/EditArea";
 import { EditCategory } from "./Edit/EditCategory";
+import { EditCategoryField } from "./Edit/EditCategoryField";
 import { EditCity } from "./Edit/EditCity";
+import { EditCompany } from "./Edit/EditCompany";
+import { EditCompanySubCategory } from "./Edit/EditCompanySubCategory";
 import { EditCountry } from "./Edit/EditCountry";
+import { EditCustomer } from "./Edit/EditCustomer";
+import { EditDesignation } from "./Edit/EditDesignation";
+import { EditPackage } from "./Edit/EditPackage";
 import { EditPinCode } from "./Edit/EditPinCode";
 import { EditState } from "./Edit/EditState";
 import { EditSubCategory } from "./Edit/EditSubCategory";
@@ -175,23 +187,18 @@ const App = () => {
         <Resource
           name="categoryField"
           list={ComSubList}
+          create={CreateCategoryField}
+          edit={EditCategoryField}
           icon={AdUnitsIcon}
           options={{
             label: "Category Fields",
           }}
         />
-        {/* <Resource
-          name="comsub"
-          list={ComSubList}
-          icon={AdUnitsIcon}
-          recordRepresentation={(record) => `${record.name}`}
-          options={{
-            label: "ComSub Category",
-          }}
-        /> */}
         <Resource
           name="designation"
           list={DesList}
+          create={CreateDesignation}
+          edit={EditDesignation}
           icon={PhoneCallbackSharpIcon}
           recordRepresentation={(record) => `${record.name}`}
           options={{
@@ -210,6 +217,8 @@ const App = () => {
         <Resource
           name="package"
           list={PackageList}
+          create={CreatePackage}
+          edit={EditPackage}
           icon={AccessibilityIcon}
           recordRepresentation={(record) => `${record.name}`}
           options={{
@@ -219,6 +228,8 @@ const App = () => {
         <Resource
           name="customer"
           list={CustomerList}
+          create={CreateCustomer}
+          edit={EditCustomer}
           recordRepresentation={(record) => `${record.name}`}
           icon={UserIcon}
           options={{
@@ -228,6 +239,8 @@ const App = () => {
         <Resource
           name="company"
           list={CompanyList}
+          create={CreateCompany}
+          edit={EditCompany}
           recordRepresentation={(record) => `${record.name}`}
           icon={UserIcon}
           options={{
@@ -237,6 +250,8 @@ const App = () => {
         <Resource
           name="comSubCat"
           list={CompanySubCategoryList}
+          create={CreateCompanySubCategory}
+          edit={EditCompanySubCategory}
           recordRepresentation={(record) => `${record.name}`}
           icon={UserIcon}
           options={{
