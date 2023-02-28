@@ -32,10 +32,14 @@ export const MyMenu = () => {
       </header> */}
       <nav className="side-navigation">
         <ul>
-          {Object.keys(resources).map((name) => {
+          {Object.keys(resources).map((name, index) => {
             const Icon = resources[name].icon;
             return (
-              <li className="lbl-li">
+              <li
+                className={`lbl-li ${
+                  resources[name].options.inside ? "inside-menu" : ""
+                }`}
+              >
                 <a className="" href={`/#/${name}`}>
                   {resources[name].icon && <Icon width={10} height={20} />}
                   <span title={name} className="lbl-text">

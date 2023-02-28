@@ -12,12 +12,14 @@ import AdUnitsIcon from "@mui/icons-material/AdUnits";
 import { CategoryList } from "./List/CategoryList";
 import { ComSubList } from "./List/ComSubList";
 import { CompanyList } from "./List/CompanyList";
+import { CompanyLocationList } from "./List/CompanyLocationList";
 import { CompanySubCategoryList } from "./List/CompanySubCategoryList";
 import { CreateArea } from "./Create/CreateArea";
 import { CreateCategory } from "./Create/CreateCategory";
 import { CreateCategoryField } from "./Create/CreatCategoryField";
 import { CreateCity } from "./Create/CreateCity";
 import { CreateCompany } from "./Create/CreateCompany";
+import { CreateCompanyLocation } from "./Create/CreateCompanyLocation";
 import { CreateCompanySubCategory } from "./Create/CreateCompanySubCategory";
 import { CreateCountry } from "./Create/CreateCountry";
 import { CreateCustomer } from "./Create/CreateCustomer";
@@ -34,6 +36,7 @@ import { EditCategory } from "./Edit/EditCategory";
 import { EditCategoryField } from "./Edit/EditCategoryField";
 import { EditCity } from "./Edit/EditCity";
 import { EditCompany } from "./Edit/EditCompany";
+import { EditCompanyLocation } from "./Edit/EditCompanyLocation";
 import { EditCompanySubCategory } from "./Edit/EditCompanySubCategory";
 import { EditCountry } from "./Edit/EditCountry";
 import { EditCustomer } from "./Edit/EditCustomer";
@@ -263,9 +266,9 @@ const App = () => {
         />
         <Resource
           name="location"
-          list={CompanyList}
-          create={CreateCompany}
-          edit={EditCompany}
+          list={CompanyLocationList}
+          create={CreateCompanyLocation}
+          edit={EditCompanyLocation}
           recordRepresentation={(record) => `${record.name}`}
           icon={UserIcon}
           options={{
