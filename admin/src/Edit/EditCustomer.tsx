@@ -13,6 +13,8 @@ import {
 } from "react-admin";
 import { useNotify, useRedirect, useRefresh } from "react-admin";
 
+import { CustomerForm } from "../Create/CreateCustomer";
+
 export const EditCustomer = () => {
   // const notify = useNotify();
   // const refresh = useRefresh();
@@ -26,7 +28,7 @@ export const EditCustomer = () => {
   return (
     <Edit mutationMode="pessimistic">
       <SimpleForm>
-        <TextInput source="name" validate={[required()]} fullWidth />
+      <CustomerForm />
       </SimpleForm>
     </Edit>
   );
