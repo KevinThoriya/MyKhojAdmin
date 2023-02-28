@@ -230,7 +230,7 @@ const App = () => {
           list={CustomerList}
           create={CreateCustomer}
           edit={EditCustomer}
-          recordRepresentation={(record) => `${record.name}`}
+          recordRepresentation={(record) => `${record.fname} ${record.lname}`}
           icon={UserIcon}
           options={{
             label: "Customer",
@@ -252,7 +252,7 @@ const App = () => {
           list={CompanySubCategoryList}
           create={CreateCompanySubCategory}
           edit={EditCompanySubCategory}
-          recordRepresentation={(record) => `${record.name}`}
+          recordRepresentation={(record) => `${record.com_id}-${record.sc_id}`}
           icon={UserIcon}
           options={{
             label: "Company Sub Category",

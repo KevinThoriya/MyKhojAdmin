@@ -27,17 +27,23 @@ export const EditPinCode = () => {
   return (
     <Edit mutationMode="pessimistic">
       <SimpleForm>
-      <TextInput source="code" validate={[required(), number()]} fullWidth options={{
-
-      }} name="pincode" resource='pincode' />
-      <ReferenceInput
-        source="ci_id"
-        reference="city"
-        label="City"
-        validate={[required()]}
-      >
-        <AutocompleteInput label="City" validate={[required()]} />
-      </ReferenceInput>
+        <TextInput
+          source="code"
+          validate={[required(), number()]}
+          fullWidth
+          options={{}}
+          name="pincode"
+          resource="pincode"
+        />
+        <ReferenceInput
+          source="ci_id"
+          reference="city"
+          label="City"
+          validate={[required()]}
+          fullWidth
+        >
+          <AutocompleteInput label="City" fullWidth validate={[required()]} />
+        </ReferenceInput>
       </SimpleForm>
     </Edit>
   );

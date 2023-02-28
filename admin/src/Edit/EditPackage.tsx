@@ -9,6 +9,7 @@ import {
   ReferenceInput,
   SimpleForm,
   TextInput,
+  number,
   required,
 } from "react-admin";
 import { useNotify, useRedirect, useRefresh } from "react-admin";
@@ -27,6 +28,36 @@ export const EditPackage = () => {
     <Edit mutationMode="pessimistic">
       <SimpleForm>
         <TextInput source="name" validate={[required()]} fullWidth />
+        <TextInput
+          source="description"
+          name="brief"
+          resource="brief"
+          validate={[required()]}
+          fullWidth
+        />
+        <TextInput
+          source="status"
+          validate={[required(), number()]}
+          fullWidth
+        />
+        <TextInput
+          source="validity"
+          validate={[required(), number()]}
+          fullWidth
+        />
+        <ReferenceInput
+          source="pt_id"
+          reference="packageType"
+          label="Package Type"
+          validate={[required()]}
+          fullWidth
+        >
+          <AutocompleteInput
+            label="Package Type"
+            validate={[required()]}
+            fullWidth
+          />
+        </ReferenceInput>
       </SimpleForm>
     </Edit>
   );

@@ -4,7 +4,7 @@ import axios, { AxiosError } from "axios";
 import { HttpError } from "react-admin";
 import { stringify } from "query-string";
 
-const apiUrl = "http://35.154.165.33:9000/api";
+export const apiUrl = "http://35.154.165.33:9000/api";
 const httpClient = fetchUtils.fetchJson;
 
 const getMany = (resource: any, id: any) => {

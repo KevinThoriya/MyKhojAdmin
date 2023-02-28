@@ -27,8 +27,9 @@ export const CreatePinCode = () => (
         reference="city"
         label="City"
         validate={[required()]}
+        fullWidth
       >
-        <AutocompleteInput label="City" validate={[required()]} />
+        <AutocompleteInput label="City" validate={[required()]} fullWidth />
       </ReferenceInput>
     </SimpleForm>
   </Create>

@@ -26,7 +26,7 @@ export const EditDesignation = () => {
   return (
     <Edit mutationMode="pessimistic">
       <SimpleForm>
-        <TextInput source="name" validate={[required()]} fullWidth />
+      <TextInput source="des" validate={[required()]} fullWidth />
       </SimpleForm>
     </Edit>
   );

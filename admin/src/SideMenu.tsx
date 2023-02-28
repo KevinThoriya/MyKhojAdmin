@@ -15,7 +15,12 @@ export const MyMenu = () => {
   const resources = useResourceDefinitions();
 
   return (
-    <aside>
+    <aside
+      style={{
+        overflow: "scroll",
+        paddingBottom: "50px",
+      }}
+    >
       {/* <header>
         <div>
           <img

@@ -32,8 +32,9 @@ export const EditArea = () => {
           reference="pincode"
           label="pincode"
           validate={[required()]}
+          fullWidth
         >
-          <AutocompleteInput label="Pincode" validate={[required()]} />
+          <AutocompleteInput label="Pincode" validate={[required()]}  fullWidth/>
         </ReferenceInput>
       </SimpleForm>
     </Edit>

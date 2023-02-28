@@ -20,8 +20,9 @@ export const CreateCity = () => (
         reference="state"
         label="State"
         validate={[required()]}
+        fullWidth
       >
-        <AutocompleteInput label="State" validate={[required()]} />
+        <AutocompleteInput label="State" validate={[required()]} fullWidth />
       </ReferenceInput>
     </SimpleForm>
   </Create>

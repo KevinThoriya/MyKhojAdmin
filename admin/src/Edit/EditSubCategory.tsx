@@ -33,8 +33,13 @@ export const EditSubCategory = () => {
           reference="category"
           label="Category"
           validate={[required()]}
+          fullWidth
         >
-          <AutocompleteInput label="Category" validate={[required()]} />
+          <AutocompleteInput
+            fullWidth
+            label="Category"
+            validate={[required()]}
+          />
         </ReferenceInput>
       </SimpleForm>
     </Edit>

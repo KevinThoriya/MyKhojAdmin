@@ -21,8 +21,9 @@ export const CreateSubCategory = () => (
         reference="category"
         label="Category"
         validate={[required()]}
+        fullWidth
       >
-        <AutocompleteInput label="Category" validate={[required()]} />
+        <AutocompleteInput label="Category" validate={[required()]} fullWidth />
       </ReferenceInput>
     </SimpleForm>
   </Create>

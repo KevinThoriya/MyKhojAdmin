@@ -13,6 +13,8 @@ import {
 } from "react-admin";
 import { useNotify, useRedirect, useRefresh } from "react-admin";
 
+import { CompanyForm } from "../Create/CreateCompany";
+
 export const EditCompany = () => {
   // const notify = useNotify();
   // const refresh = useRefresh();
@@ -26,7 +28,7 @@ export const EditCompany = () => {
   return (
     <Edit mutationMode="pessimistic">
       <SimpleForm>
-        <TextInput source="name" validate={[required()]} fullWidth />
+        <CompanyForm />
       </SimpleForm>
     </Edit>
   );

@@ -20,8 +20,9 @@ export const CreateArea = () => (
         reference="pincode"
         label="Pincode"
         validate={[required()]}
+        fullWidth
       >
-        <AutocompleteInput label="Pincode" validate={[required()]} />
+        <AutocompleteInput label="Pincode" validate={[required()]} fullWidth />
       </ReferenceInput>
     </SimpleForm>
   </Create>

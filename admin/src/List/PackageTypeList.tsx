@@ -5,6 +5,8 @@ export const PackageTypeList = () => {
     <List>
       <Datagrid rowClick="edit">
         <TextField source="id" />
+        <TextField source="type" />
+        <TextField source="name" />
       </Datagrid>
     </List>
   );

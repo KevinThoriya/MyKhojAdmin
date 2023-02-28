@@ -32,8 +32,13 @@ export const EditState = () => {
           reference="country"
           label="Country"
           validate={[required()]}
+          fullWidth
         >
-          <AutocompleteInput label="Country" validate={[required()]} />
+          <AutocompleteInput
+            fullWidth
+            label="Country"
+            validate={[required()]}
+          />
         </ReferenceInput>
       </SimpleForm>
     </Edit>

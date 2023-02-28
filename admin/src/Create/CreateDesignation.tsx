@@ -14,7 +14,7 @@ import {
 export const CreateDesignation = () => (
   <Create>
     <SimpleForm>
-      <TextInput source="name" validate={[required()]} fullWidth />
+      <TextInput source="des" validate={[required()]} fullWidth />
     </SimpleForm>
   </Create>
 );
