@@ -24,6 +24,7 @@ import { CreateCustomer } from "./Create/CreateCustomer";
 import { CreateDesignation } from "./Create/CreateDesignation";
 import { CreatePackage } from "./Create/CreatePackage";
 import { CreatePinCode } from "./Create/CreatePinCode";
+import { CreateSocial } from "./Create/CreateSocial";
 import { CreateState } from "./Create/CreateState";
 import { CreateSubCategory } from "./Create/CreateSubCategory";
 import { CustomerList } from "./List/CustomerList";
@@ -39,6 +40,7 @@ import { EditCustomer } from "./Edit/EditCustomer";
 import { EditDesignation } from "./Edit/EditDesignation";
 import { EditPackage } from "./Edit/EditPackage";
 import { EditPinCode } from "./Edit/EditPinCode";
+import { EditSocial } from "./Edit/EditSocial";
 import { EditState } from "./Edit/EditState";
 import { EditSubCategory } from "./Edit/EditSubCategory";
 import { ListArea } from "./List/ListArea";
@@ -54,6 +56,7 @@ import { MyMenu } from "./SideMenu";
 import { PackageList } from "./List/PackageList";
 import { PackageTypeList } from "./List/PackageTypeList";
 import PhoneCallbackSharpIcon from "@mui/icons-material/PhoneCallbackSharp";
+import { SocialList } from "./List/SocialList";
 import { SubCategoryList } from "./List/SubCategoryList";
 import UserIcon from "@mui/icons-material/People";
 import { authProvider } from "./authProvider";
@@ -245,6 +248,28 @@ const App = () => {
           icon={UserIcon}
           options={{
             label: "Company",
+          }}
+        />
+        <Resource
+          name="social"
+          list={SocialList}
+          create={CreateSocial}
+          edit={EditSocial}
+          recordRepresentation={(record) => `${record.name}`}
+          icon={UserIcon}
+          options={{
+            label: "Social",
+          }}
+        />
+        <Resource
+          name="location"
+          list={CompanyList}
+          create={CreateCompany}
+          edit={EditCompany}
+          recordRepresentation={(record) => `${record.name}`}
+          icon={UserIcon}
+          options={{
+            label: "Location",
           }}
         />
         <Resource
