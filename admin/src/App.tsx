@@ -11,6 +11,8 @@ import AccessibilityIcon from "@mui/icons-material/Accessibility";
 import AdUnitsIcon from "@mui/icons-material/AdUnits";
 import { CategoryList } from "./List/CategoryList";
 import { ComSubList } from "./List/ComSubList";
+import { CompanyList } from "./List/CompanyList";
+import { CompanySubCategoryList } from "./List/CompanySubCategoryList";
 import { CreateArea } from "./Create/CreateArea";
 import { CreateCategory } from "./Create/CreateCategory";
 import { CreateCity } from "./Create/CreateCity";
@@ -38,6 +40,7 @@ import LocationIcon from "@mui/icons-material/LocationCity";
 import MyAppBar from "./AppBar";
 import { MyMenu } from "./SideMenu";
 import { PackageList } from "./List/PackageList";
+import { PackageTypeList } from "./List/PackageTypeList";
 import PhoneCallbackSharpIcon from "@mui/icons-material/PhoneCallbackSharp";
 import { SubCategoryList } from "./List/SubCategoryList";
 import UserIcon from "@mui/icons-material/People";
@@ -170,14 +173,14 @@ const App = () => {
           }}
         />
         <Resource
-          name="catfield"
+          name="categoryField"
           list={ComSubList}
           icon={AdUnitsIcon}
           options={{
             label: "Category Fields",
           }}
         />
-        <Resource
+        {/* <Resource
           name="comsub"
           list={ComSubList}
           icon={AdUnitsIcon}
@@ -185,14 +188,32 @@ const App = () => {
           options={{
             label: "ComSub Category",
           }}
-        />
+        /> */}
         <Resource
-          name="des"
+          name="designation"
           list={DesList}
           icon={PhoneCallbackSharpIcon}
           recordRepresentation={(record) => `${record.name}`}
           options={{
             label: "Designation",
+          }}
+        />
+        <Resource
+          name="packageType"
+          list={PackageTypeList}
+          icon={PhoneCallbackSharpIcon}
+          recordRepresentation={(record) => `${record.name}`}
+          options={{
+            label: "Package Type",
+          }}
+        />
+        <Resource
+          name="package"
+          list={PackageList}
+          icon={AccessibilityIcon}
+          recordRepresentation={(record) => `${record.name}`}
+          options={{
+            label: "Package",
           }}
         />
         <Resource
@@ -205,12 +226,21 @@ const App = () => {
           }}
         />
         <Resource
-          name="package"
-          list={PackageList}
-          icon={AccessibilityIcon}
+          name="company"
+          list={CompanyList}
           recordRepresentation={(record) => `${record.name}`}
+          icon={UserIcon}
           options={{
-            label: "Package",
+            label: "Company",
+          }}
+        />
+        <Resource
+          name="comSubCat"
+          list={CompanySubCategoryList}
+          recordRepresentation={(record) => `${record.name}`}
+          icon={UserIcon}
+          options={{
+            label: "Company Sub Category",
           }}
         />
       </Admin>
