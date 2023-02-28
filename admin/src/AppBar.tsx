@@ -9,9 +9,11 @@ import {
 } from "react-admin";
 
 import Typography from "@mui/material/Typography";
+import { useMediaQuery } from "@mui/material";
 
 const MyAppBar = (props: any) => {
-  console.log(props);
+  const isXSmall = useMediaQuery((theme: any) => theme.breakpoints.down("sm"));
+
   const { children, userMenu = <UserMenu /> } = props;
 
   return (
@@ -21,7 +23,7 @@ const MyAppBar = (props: any) => {
           className="icons"
           style={{ display: "flex", alignItems: "center" }}
         >
-          <SidebarToggleButton className={""} />
+          {isXSmall && <SidebarToggleButton className={""} />}
           {/* Admin DashBoard */}
           {React.Children.count(children) === 0 ? (
             <Typography

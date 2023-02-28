@@ -60,6 +60,7 @@ import { PackageList } from "./List/PackageList";
 import { PackageTypeList } from "./List/PackageTypeList";
 import PhoneCallbackSharpIcon from "@mui/icons-material/PhoneCallbackSharp";
 import { SocialList } from "./List/SocialList";
+import StartIcon from "@mui/icons-material/Start";
 import { SubCategoryList } from "./List/SubCategoryList";
 import UserIcon from "@mui/icons-material/People";
 import { authProvider } from "./authProvider";
@@ -259,9 +260,10 @@ const App = () => {
           create={CreateSocial}
           edit={EditSocial}
           recordRepresentation={(record) => `${record.name}`}
-          icon={UserIcon}
+          icon={StartIcon}
           options={{
             label: "Social",
+            inside: true,
           }}
         />
         <Resource
@@ -270,9 +272,10 @@ const App = () => {
           create={CreateCompanyLocation}
           edit={EditCompanyLocation}
           recordRepresentation={(record) => `${record.name}`}
-          icon={UserIcon}
+          icon={StartIcon}
           options={{
             label: "Location",
+            inside: true,
           }}
         />
         <Resource
@@ -281,9 +284,10 @@ const App = () => {
           create={CreateCompanySubCategory}
           edit={EditCompanySubCategory}
           recordRepresentation={(record) => `${record.com_id}-${record.sc_id}`}
-          icon={UserIcon}
+          icon={StartIcon}
           options={{
             label: "Company Sub Category",
+            inside: true,
           }}
         />
       </Admin>

@@ -563,3 +563,7 @@ p {
   border-bottom: 1px solid #ccc;
   padding: 5px;
 }
+
+.inside-menu {
+  margin-left: 10px;
+}

@@ -7,12 +7,16 @@ import {
   DateInput,
   Edit,
   IconButtonWithTooltip,
+  ImageField,
+  ImageInput,
   ReferenceInput,
   SimpleForm,
   TextInput,
   required,
   useRecordContext,
 } from "react-admin";
+
+import { apiUrl } from "../dataProvider";
 
 export const CreateCustomer = () => (
   <Create>
@@ -73,6 +77,12 @@ export const CustomerForm = () => {
         <Button
           label="Add Alternative Contact"
           onClick={() => setAlternativeFirst(true)}
+          variant="contained"
+          size="medium"
+          style={{
+            marginTop: "15px",
+            marginBottom: "15px",
+          }}
         />
       )}
 
@@ -93,9 +103,28 @@ export const CustomerForm = () => {
           <Button
             label="Add Alternative Contact"
             onClick={() => setAlternativeSecond(true)}
+            variant="contained"
+            size="medium"
+            style={{
+              marginTop: "15px",
+              marginBottom: "15px",
+            }}
           />
         )
       )}
+
+      <ImageInput source="file" label="Image" accept="image/*">
+        {record?.image ? (
+          <div>
+            <img
+              src={`${apiUrl}/assets/customer/${record.image}`}
+              title="image"
+            />
+          </div>
+        ) : (
+          <ImageField source="src" />
+        )}
+      </ImageInput>
     </>
   );
 };

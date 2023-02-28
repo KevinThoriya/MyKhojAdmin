@@ -18,7 +18,7 @@ import {
   useRecordContext,
 } from "react-admin";
 
-import { apiUrl } from '../dataProvider';
+import { apiUrl } from "../dataProvider";
 
 export const CreateCompany = () => (
   <Create>
@@ -57,11 +57,18 @@ export const CompanyForm = () => {
       <TextInput source="mobile" validate={[number()]} fullWidth />
       <TextInput source="gst" validate={[]} fullWidth />
       <TextInput source="email" validate={[email()]} fullWidth />
-      {/* <ImageInput source="image" label="Image" accept="image/*">
-      <div>
-          <img src={`${apiUrl}/assets/company/${record.image}`} title="image" />
-      </div>
-      </ImageInput> */}
+      <ImageInput source="image" label="Image" accept="image/*">
+        {record?.image ? (
+          <div>
+            <img
+              src={`${apiUrl}/assets/company/${record.image}`}
+              title="image"
+            />
+          </div>
+        ) : (
+          <ImageField source="src" />
+        )}
+      </ImageInput>
     </>
   );
 };
