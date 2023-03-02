@@ -9,7 +9,7 @@ import {
 export const CompanyList = () => {
   return (
     <List>
-      <Datagrid rowClick="edit">
+      <Datagrid bulkActionButtons={false}rowClick="edit">
         <TextField source="id" />
         <TextField source="name" />
 

@@ -3,7 +3,7 @@ import { Datagrid, List, ReferenceField, TextField } from "react-admin";
 export const PackageList = () => {
   return (
     <List>
-      <Datagrid rowClick="edit">
+      <Datagrid bulkActionButtons={false}rowClick="edit">
         <TextField source="id" />
         <TextField source="name" />
         <TextField source="description" />

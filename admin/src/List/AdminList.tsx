@@ -3,7 +3,7 @@ import { Datagrid, List, ReferenceField, TextField } from "react-admin";
 export const AdminList = () => {
   return (
     <List>
-      <Datagrid rowClick="edit">
+      <Datagrid bulkActionButtons={false}rowClick="edit">
         <TextField source="username" label="User Name" />
         <TextField source="fname" label="First Name" />
         <TextField source="lname" label="Last Name" />

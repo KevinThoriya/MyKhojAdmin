@@ -1,4 +1,9 @@
-import { DataProvider, LegacyDataProvider, fetchUtils } from "react-admin";
+import {
+  DataProvider,
+  DeleteResult,
+  LegacyDataProvider,
+  fetchUtils,
+} from "react-admin";
 
 import { HttpError } from "react-admin";
 import axios from "./axiosService";
@@ -28,6 +33,37 @@ const getMany = (resource: any, id: any) => {
     } else {
       throw Error("SOmething Went Wrong! ");
     }
+  });
+};
+
+const deleteID = (resource: any, id: any, params: any = {}) => {
+  const url = `${apiUrl}/${resource}/delete`;
+  return new Promise((resolve, reject) => {
+    return axios({
+      method: "post",
+      data: {
+        id: id,
+      },
+      headers: {
+        "x-access-token": localStorage.getItem("access_token"),
+      },
+      url,
+    }).then((res) => {
+      if (res?.data?.code == 1) {
+        return resolve({
+          data: {
+            id: id,
+            ...params,
+          },
+        });
+      } else {
+        console.log("error");
+        return reject(res?.data?.message || "Error");
+        return reject(
+          new HttpError(res?.data?.message || "Error", res.status, res)
+        ); //new HttpError(res?.data?.message || "Error", 400, res?.data));
+      }
+    });
   });
 };
 
@@ -160,44 +196,16 @@ export const dataProvider: DataProvider | LegacyDataProvider = {
     });
   },
 
-  delete: (resource: any, params: any) => {
-    // httpClient(`${apiUrl}/${resource}/${params.id}`, {
-    //   method: "DELETE",
-    // }).then(({ json }) => ({ data: json })),
-    const url = `${apiUrl}/${resource}/delete`;
-    return new Promise((resolve, reject) => {
-      axios({
-        method: "post",
-        data: {
-          id: params.id,
-        },
-        headers: {
-          "x-access-token": localStorage.getItem("access_token"),
-        },
-        url,
-      }).then((res) => {
-        if (res?.data?.code == 1) {
-          return resolve({
-            id: params.id,
-            ...params,
-          });
-        } else {
-          console.log("error");
-          return reject(res?.data?.message || "Error");
-          return reject(
-            new HttpError(res?.data?.message || "Error", res.status, res)
-          ); //new HttpError(res?.data?.message || "Error", 400, res?.data));
-        }
-      });
-    });
-  },
+  delete: (resource: any, params: any) => deleteID(resource, params.id, params),
 
-  deleteMany: (resource: any, params: any) => {
-    const query = {
-      filter: JSON.stringify({ id: params.ids }),
-    };
-    return httpClient(`${apiUrl}/${resource}?${stringify(query)}`, {
-      method: "DELETE",
-    }).then(({ json }) => ({ data: json }));
+  deleteMany: async (resource: any, params: any) => {
+    const res = await Promise.allSettled(
+      params.ids.map((id: number) => deleteID(resource, id, params))
+    ).then((res) => {
+      return {
+        data: res.map((r) => (r.status == "fulfilled" ? r.value.data : {})),
+      };
+    });
+    return res;
   },
 };

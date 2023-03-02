@@ -3,7 +3,7 @@ import { Datagrid, List, ReferenceField, TextField } from "react-admin";
 export const CompanySubCategoryList = () => {
   return (
     <List>
-      <Datagrid rowClick="edit">
+      <Datagrid bulkActionButtons={false}rowClick="edit">
         <ReferenceField source="com_id" reference="company" label="Company">
           <TextField source="name" />
         </ReferenceField>
