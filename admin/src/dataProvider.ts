@@ -148,7 +148,6 @@ export const dataProvider: DataProvider | LegacyDataProvider = {
         return {
           data: {
             ...params.data,
-            id: Math.random(),
           },
         };
       } else {

@@ -15,36 +15,33 @@ import {
   email,
   number,
   required,
+  useInput,
   useRecordContext,
 } from "react-admin";
 
 import { apiUrl } from "../dataProvider";
 
-export const CreateCompany = () => (
-  <Create>
-    <SimpleForm>
-      <CompanyForm />
-    </SimpleForm>
-  </Create>
-);
+export const CreateCompany = () => {
+  const onSuccess = (data:any, variables:any, context:any) => {
+    console.log(data, variables, context);
+  };
+
+  return (
+    <Create mutationOptions={{  }}>
+      <SimpleForm>
+        <CompanyForm />
+      </SimpleForm>
+    </Create>
+  );
+};
 
 export const CompanyForm = () => {
   const record = useRecordContext();
+  const { id, field, fieldState } = useInput({ source: 'image' });
+
   console.log(record);
   return (
     <>
-      <TextInput source="name" validate={[required()]} fullWidth />
-      <TimeInput source="start_time" validate={[required()]} fullWidth />
-      <TimeInput source="end_time" validate={[required()]} fullWidth />
-      <ReferenceInput
-        source="cat_id"
-        reference="category"
-        label="Category"
-        validate={[required()]}
-        fullWidth
-      >
-        <AutocompleteInput label="Category" validate={[required()]} fullWidth />
-      </ReferenceInput>
       <ReferenceInput
         source="cas_id"
         reference="customer"
@@ -54,10 +51,26 @@ export const CompanyForm = () => {
       >
         <AutocompleteInput label="Customer" validate={[required()]} fullWidth />
       </ReferenceInput>
+      <ReferenceInput
+        source="cat_id"
+        reference="category"
+        label="Category"
+        validate={[required()]}
+        fullWidth
+      >
+        <AutocompleteInput label="Category" validate={[required()]} fullWidth />
+      </ReferenceInput>
+
+      <TextInput source="name" validate={[required()]} fullWidth />
+      <TimeInput source="start_time" validate={[required()]} fullWidth />
+      <TimeInput source="end_time" validate={[required()]} fullWidth />
+
       <TextInput source="mobile" validate={[number()]} fullWidth />
       <TextInput source="gst" validate={[]} fullWidth />
       <TextInput source="email" validate={[email()]} fullWidth />
-      <ImageInput source="image" label="Image" accept="image/*">
+      <ImageInput source="image" label="Image" accept="image/*" onChange={e => {
+        field.onChange(e);
+      }}>
         {record?.image ? (
           <div>
             <img
