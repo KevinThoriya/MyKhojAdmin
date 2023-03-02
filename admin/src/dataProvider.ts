@@ -1,7 +1,7 @@
 import { DataProvider, LegacyDataProvider, fetchUtils } from "react-admin";
-import axios, { AxiosError } from "axios";
 
 import { HttpError } from "react-admin";
+import axios from "./axiosService";
 import { stringify } from "query-string";
 
 export const apiUrl = "http://35.154.165.33:9000/api";

@@ -9,11 +9,14 @@ import {
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AccessibilityIcon from "@mui/icons-material/Accessibility";
 import AdUnitsIcon from "@mui/icons-material/AdUnits";
+import { AdminList } from "./List/AdminList";
 import { CategoryList } from "./List/CategoryList";
 import { ComSubList } from "./List/ComSubList";
 import { CompanyList } from "./List/CompanyList";
 import { CompanyLocationList } from "./List/CompanyLocationList";
 import { CompanySubCategoryList } from "./List/CompanySubCategoryList";
+import { CompanyTransactionList } from "./List/CompanyTransactionList";
+import { CreateAdmin } from "./Create/CreateAdmin";
 import { CreateArea } from "./Create/CreateArea";
 import { CreateCategory } from "./Create/CreateCategory";
 import { CreateCategoryField } from "./Create/CreatCategoryField";
@@ -31,6 +34,7 @@ import { CreateState } from "./Create/CreateState";
 import { CreateSubCategory } from "./Create/CreateSubCategory";
 import { CustomerList } from "./List/CustomerList";
 import { DesList } from "./List/DesList";
+import { EditAdmin } from "./Edit/EditAdmin";
 import { EditArea } from "./Edit/EditArea";
 import { EditCategory } from "./Edit/EditCategory";
 import { EditCategoryField } from "./Edit/EditCategoryField";
@@ -288,6 +292,29 @@ const App = () => {
           options={{
             label: "Company Sub Category",
             inside: true,
+          }}
+        />
+        <Resource
+          name="package/transaction"
+          list={CompanyTransactionList}
+          recordRepresentation={(record) =>
+            `${record.company}-${record.package}`
+          }
+          icon={StartIcon}
+          options={{
+            label: "Transaction",
+            inside: true,
+          }}
+        />
+        <Resource
+          name="admin"
+          list={AdminList}
+          create={CreateAdmin}
+          edit={EditAdmin}
+          recordRepresentation={(record) => `${record.username}`}
+          icon={UserIcon}
+          options={{
+            label: "Admin",
           }}
         />
       </Admin>

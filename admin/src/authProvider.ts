@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "./axiosService";
 
 const apiUrl = "http://35.154.165.33:9000/api/";
 
