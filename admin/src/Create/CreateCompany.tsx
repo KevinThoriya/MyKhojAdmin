@@ -51,7 +51,7 @@ export const CompanyForm = () => {
         gap={2}
       >
         <ReferenceInput
-          source="cas_id"
+          source="cus_id"
           reference="customer"
           label="Customer"
           validate={[required()]}
