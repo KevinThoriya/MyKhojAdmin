@@ -34,6 +34,7 @@ const getMany = (resource: any, id: any) => {
 // TypeScript users must reference the type `DataProvider`
 export const dataProvider: DataProvider | LegacyDataProvider = {
   getList: (resource: any, params: any) => {
+    const { data, khoj, url: filterUrl } = params.filter;
     const { page, perPage } = params.pagination;
     const { field, order } = params.sort;
     const query = {
@@ -42,18 +43,21 @@ export const dataProvider: DataProvider | LegacyDataProvider = {
       filter: JSON.stringify(params.filter),
     };
     let resourceUrl = resource + "/all";
-    const url = `${apiUrl}/${resourceUrl}?${stringify(query)}`;
+    const url = khoj
+      ? `${apiUrl}/${filterUrl}`
+      : `${apiUrl}/${resourceUrl}?${stringify(query)}`;
     return axios({
-      method: "get",
+      method: khoj ? "post" : "get",
       url,
       headers: {
         "x-access-token": localStorage.getItem("access_token"),
       },
+      data: khoj ? data : undefined,
     }).then((res) => {
       if (res?.data?.code == 1) {
         return {
-          data: res?.data?.data,
-          total: res?.data?.data?.length,
+          data: res?.data?.data || [],
+          total: res?.data?.data?.length || 0,
         };
       } else {
         throw Error("Something went Wrong !");
@@ -161,8 +165,8 @@ export const dataProvider: DataProvider | LegacyDataProvider = {
     //   method: "DELETE",
     // }).then(({ json }) => ({ data: json })),
     const url = `${apiUrl}/${resource}/delete`;
-    return new Promise((resolve,reject)=> {
-       axios({
+    return new Promise((resolve, reject) => {
+      axios({
         method: "post",
         data: {
           id: params.id,
@@ -180,10 +184,12 @@ export const dataProvider: DataProvider | LegacyDataProvider = {
         } else {
           console.log("error");
           return reject(res?.data?.message || "Error");
-          return reject(new HttpError(res?.data?.message || "Error", res.status, res)); //new HttpError(res?.data?.message || "Error", 400, res?.data));
+          return reject(
+            new HttpError(res?.data?.message || "Error", res.status, res)
+          ); //new HttpError(res?.data?.message || "Error", 400, res?.data));
         }
       });
-    })
+    });
   },
 
   deleteMany: (resource: any, params: any) => {
