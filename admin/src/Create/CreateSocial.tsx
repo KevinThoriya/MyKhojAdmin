@@ -17,6 +17,7 @@ import {
   required,
   useRecordContext,
 } from "react-admin";
+import { Grid, Stack } from "@mui/material";
 
 import { apiUrl } from "../dataProvider";
 
@@ -33,22 +34,59 @@ export const SocialForm = () => {
 
   return (
     <>
-      <ReferenceInput
-        source="com_id"
-        reference="company"
-        label="Company"
-        validate={[required()]}
-        fullWidth
+      <Stack
+        direction={"row"}
+        justifyContent={"space-between"}
+        alignItems="stretch"
+        width={"100%"}
+        gap={2}
       >
-        <AutocompleteInput label="Company" validate={[required()]} fullWidth />
-      </ReferenceInput>
-      <TextInput source="wa" label="WhatsApp" fullWidth />
-      <TextInput source="fb" label="FaceBook" fullWidth />
-      <TextInput source="ig" label="InstaGram" fullWidth />
-      <TextInput source="li" label="LinkedIn" fullWidth />
-      <TextInput source="twi" label="Twitter" fullWidth />
-      <TextInput source="tele" label="TeleGram" fullWidth />
-      <TextInput source="yt" label="YouTube" fullWidth />
+        <ReferenceInput
+          source="com_id"
+          reference="company"
+          label="Company"
+          validate={[required()]}
+          fullWidth
+        >
+          <AutocompleteInput
+            label="Company"
+            validate={[required()]}
+            fullWidth
+          />
+        </ReferenceInput>
+      </Stack>
+      <Stack
+        direction={"row"}
+        justifyContent={"space-between"}
+        alignItems="stretch"
+        width={"100%"}
+        gap={2}
+      >
+        <TextInput source="wa" label="WhatsApp" fullWidth />
+        <TextInput source="fb" label="FaceBook" fullWidth />
+      </Stack>
+      <Stack
+        direction={"row"}
+        justifyContent={"space-between"}
+        alignItems="stretch"
+        width={"100%"}
+        gap={2}
+      >
+        <TextInput source="ig" label="InstaGram" fullWidth />
+
+        <TextInput source="li" label="LinkedIn" fullWidth />
+        <TextInput source="twi" label="Twitter" fullWidth />
+      </Stack>
+      <Stack
+        direction={"row"}
+        justifyContent={"space-between"}
+        alignItems="stretch"
+        width={"100%"}
+        gap={2}
+      >
+        <TextInput source="tele" label="TeleGram" fullWidth />
+        <TextInput source="yt" label="YouTube" fullWidth />
+      </Stack>
     </>
   );
 };

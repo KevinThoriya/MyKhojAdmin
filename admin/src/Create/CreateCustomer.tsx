@@ -15,6 +15,7 @@ import {
   required,
   useRecordContext,
 } from "react-admin";
+import { Grid, Stack } from "@mui/material";
 
 import { apiUrl } from "../dataProvider";
 
@@ -37,41 +38,72 @@ export const CustomerForm = () => {
   );
   return (
     <>
-      <TextInput
-        source="fname"
-        validate={[required()]}
-        fullWidth
-        label="First Name"
-      />
-      <TextInput
-        source="lname"
-        validate={[required()]}
-        fullWidth
-        label="Last Name"
-      />
-      <TextInput
-        source="mobile"
-        validate={[required()]}
-        fullWidth
-        label="Mobile"
-      />
-      <TextInput
-        source="email"
-        validate={[required()]}
-        fullWidth
-        label="Email"
-      />
+      <Stack
+        direction={"row"}
+        justifyContent={"space-between"}
+        alignItems="stretch"
+        width={"100%"}
+        gap={2}
+      >
+        <TextInput
+          source="fname"
+          validate={[required()]}
+          fullWidth
+          label="First Name"
+        />
+        <TextInput
+          source="lname"
+          validate={[required()]}
+          fullWidth
+          label="Last Name"
+        />
+      </Stack>
+      <Stack
+        direction={"row"}
+        justifyContent={"space-between"}
+        alignItems="stretch"
+        width={"100%"}
+        gap={2}
+      >
+        <TextInput
+          source="mobile"
+          validate={[required()]}
+          fullWidth
+          label="Mobile"
+        />
+
+        <TextInput
+          source="email"
+          validate={[required()]}
+          fullWidth
+          label="Email"
+        />
+      </Stack>
+
       {alternativeFirst ? (
         <div className="box-contact">
           <div className="box-header">Alternative Contact 1:</div>
-          <TextInput
-            source="a1_fname"
-            name="a1f"
-            fullWidth
-            label="First Name"
-          />
-          <TextInput source="a1_lname" name="a1l" fullWidth label="Last Name" />
-          <TextInput source="a1_mobile" name="a1m" fullWidth label="Mobile" />
+          <Stack
+            direction={"row"}
+            justifyContent={"space-between"}
+            alignItems="stretch"
+            width={"100%"}
+            gap={2}
+          >
+            <TextInput
+              source="a1_fname"
+              name="a1f"
+              fullWidth
+              label="First Name"
+            />
+            <TextInput
+              source="a1_lname"
+              name="a1l"
+              fullWidth
+              label="Last Name"
+            />
+            <TextInput source="a1_mobile" name="a1m" fullWidth label="Mobile" />
+          </Stack>
         </div>
       ) : (
         <Button
@@ -89,14 +121,27 @@ export const CustomerForm = () => {
       {alternativeSecond ? (
         <div className="box-contact">
           <div className="box-header">Alternative Contact 2:</div>
-          <TextInput
-            source="a2_fname"
-            name="a2f"
-            fullWidth
-            label="First Name"
-          />
-          <TextInput source="a2_lname" name="a2l" fullWidth label="Last Name" />
-          <TextInput source="a2_mobile" name="a2m" fullWidth label="Mobile" />
+          <Stack
+            direction={"row"}
+            justifyContent={"space-between"}
+            alignItems="stretch"
+            width={"100%"}
+            gap={2}
+          >
+            <TextInput
+              source="a2_fname"
+              name="a2f"
+              fullWidth
+              label="First Name"
+            />
+            <TextInput
+              source="a2_lname"
+              name="a2l"
+              fullWidth
+              label="Last Name"
+            />
+            <TextInput source="a2_mobile" name="a2m" fullWidth label="Mobile" />
+          </Stack>
         </div>
       ) : (
         alternativeFirst && (

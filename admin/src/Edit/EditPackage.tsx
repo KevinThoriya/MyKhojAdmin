@@ -14,6 +14,8 @@ import {
 } from "react-admin";
 import { useNotify, useRedirect, useRefresh } from "react-admin";
 
+import { PackageForm } from "../Create/CreatePackage";
+
 export const EditPackage = () => {
   // const notify = useNotify();
   // const refresh = useRefresh();
@@ -27,37 +29,7 @@ export const EditPackage = () => {
   return (
     <Edit mutationMode="pessimistic">
       <SimpleForm>
-        <TextInput source="name" validate={[required()]} fullWidth />
-        <TextInput
-          source="description"
-          name="brief"
-          resource="brief"
-          validate={[required()]}
-          fullWidth
-        />
-        <TextInput
-          source="status"
-          validate={[required(), number()]}
-          fullWidth
-        />
-        <TextInput
-          source="validity"
-          validate={[required(), number()]}
-          fullWidth
-        />
-        <ReferenceInput
-          source="pt_id"
-          reference="packageType"
-          label="Package Type"
-          validate={[required()]}
-          fullWidth
-        >
-          <AutocompleteInput
-            label="Package Type"
-            validate={[required()]}
-            fullWidth
-          />
-        </ReferenceInput>
+        <PackageForm />
       </SimpleForm>
     </Edit>
   );

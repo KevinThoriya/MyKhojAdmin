@@ -10,28 +10,45 @@ import {
   TextInput,
   required,
 } from "react-admin";
+import { Grid, Stack } from "@mui/material";
 
 export const CreateCompanySubCategory = () => (
   <Create>
     <SimpleForm>
-    <ReferenceInput
-        source="com_id"
-        reference="company"
-        label="Company"
-        validate={[required()]}
-        fullWidth
+      <Stack
+        direction={"row"}
+        justifyContent={"space-between"}
+        alignItems="stretch"
+        width={"100%"}
+        gap={2}
       >
-        <AutocompleteInput label="Company" validate={[required()]} fullWidth />
-      </ReferenceInput>
-      <ReferenceInput
-        source="sc_id"
-        reference="subCategory"
-        label="Sub Category"
-        validate={[required()]}
-        fullWidth
-      >
-        <AutocompleteInput label="Sub Category" validate={[required()]} fullWidth />
-      </ReferenceInput>
+        <ReferenceInput
+          source="com_id"
+          reference="company"
+          label="Company"
+          validate={[required()]}
+          fullWidth
+        >
+          <AutocompleteInput
+            label="Company"
+            validate={[required()]}
+            fullWidth
+          />
+        </ReferenceInput>
+        <ReferenceInput
+          source="sc_id"
+          reference="subCategory"
+          label="Sub Category"
+          validate={[required()]}
+          fullWidth
+        >
+          <AutocompleteInput
+            label="Sub Category"
+            validate={[required()]}
+            fullWidth
+          />
+        </ReferenceInput>
+      </Stack>
     </SimpleForm>
   </Create>
 );

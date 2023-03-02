@@ -14,6 +14,8 @@ import {
 } from "react-admin";
 import { useNotify, useRedirect, useRefresh } from "react-admin";
 
+import { CategoryForm } from "../Create/CreateCategory";
+
 export const EditCategory = () => {
   // const notify = useNotify();
   // const refresh = useRefresh();
@@ -27,16 +29,7 @@ export const EditCategory = () => {
   return (
     <Edit mutationMode="pessimistic">
       <SimpleForm>
-        <TextInput source="name" validate={[required()]} fullWidth />
-        <SelectInput
-          source="type"
-          validate={[required()]}
-          choices={[
-            { id: "B2C", name: "B2C" },
-            { id: "B2B", name: "B2B" },
-            { id: "BOTH", name: "BOTH" },
-          ]}
-        />
+        <CategoryForm />
       </SimpleForm>
     </Edit>
   );

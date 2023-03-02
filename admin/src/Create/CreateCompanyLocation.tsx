@@ -17,6 +17,7 @@ import {
   required,
   useRecordContext,
 } from "react-admin";
+import { Grid, Stack } from "@mui/material";
 
 import { apiUrl } from "../dataProvider";
 
@@ -33,28 +34,55 @@ export const CompanyLocationForm = () => {
 
   return (
     <>
-      <ReferenceInput
-        source="com_id"
-        reference="company"
-        label="Company"
-        validate={[required()]}
-        fullWidth
+      <Stack
+        direction={"row"}
+        justifyContent={"space-between"}
+        alignItems="stretch"
+        width={"100%"}
+        gap={2}
       >
-        <AutocompleteInput label="Company" validate={[required()]} fullWidth />
-      </ReferenceInput>
-      <ReferenceInput
-        source="ar_id"
-        reference="area"
-        label="Area"
-        validate={[required()]}
+        <ReferenceInput
+          source="com_id"
+          reference="company"
+          label="Company"
+          validate={[required()]}
+          fullWidth
+        >
+          <AutocompleteInput
+            label="Company"
+            validate={[required()]}
+            fullWidth
+          />
+        </ReferenceInput>
+        <ReferenceInput
+          source="ar_id"
+          reference="area"
+          label="Area"
+          validate={[required()]}
+          fullWidth
+        >
+          <AutocompleteInput label="Area" validate={[required()]} fullWidth />
+        </ReferenceInput>
+      </Stack>
+
+      <TextInput
+        multiline
+        rows={2}
+        source="address"
+        label="Address"
         fullWidth
+        validate={[required()]}
+      />
+      <Stack
+        direction={"row"}
+        justifyContent={"space-between"}
+        alignItems="stretch"
+        width={"100%"}
+        gap={2}
       >
-        <AutocompleteInput label="Area" validate={[required()]} fullWidth />
-      </ReferenceInput>
-      <TextInput source="address" label="WhatsApp" fullWidth validate={[required()]} />
-      <TextInput source="lan" label="latitude" fullWidth />
-      <TextInput source="lon" label="longitude" fullWidth />
-      
+        <TextInput source="lan" label="latitude" fullWidth />
+        <TextInput source="lon" label="longitude" fullWidth />
+      </Stack>
     </>
   );
 };

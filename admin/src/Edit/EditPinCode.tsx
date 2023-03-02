@@ -14,6 +14,8 @@ import {
 } from "react-admin";
 import { useNotify, useRedirect, useRefresh } from "react-admin";
 
+import { PinForm } from "../Create/CreatePinCode";
+
 export const EditPinCode = () => {
   // const notify = useNotify();
   // const refresh = useRefresh();
@@ -27,23 +29,7 @@ export const EditPinCode = () => {
   return (
     <Edit mutationMode="pessimistic">
       <SimpleForm>
-        <TextInput
-          source="code"
-          validate={[required(), number()]}
-          fullWidth
-          options={{}}
-          name="pincode"
-          resource="pincode"
-        />
-        <ReferenceInput
-          source="ci_id"
-          reference="city"
-          label="City"
-          validate={[required()]}
-          fullWidth
-        >
-          <AutocompleteInput label="City" fullWidth validate={[required()]} />
-        </ReferenceInput>
+        <PinForm />
       </SimpleForm>
     </Edit>
   );

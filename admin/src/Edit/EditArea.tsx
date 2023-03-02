@@ -13,6 +13,8 @@ import {
 } from "react-admin";
 import { useNotify, useRedirect, useRefresh } from "react-admin";
 
+import { AreaForm } from "../Create/CreateArea";
+
 export const EditArea = () => {
   // const notify = useNotify();
   // const refresh = useRefresh();
@@ -26,16 +28,7 @@ export const EditArea = () => {
   return (
     <Edit mutationMode="pessimistic">
       <SimpleForm>
-        <TextInput source="name" validate={[required()]} fullWidth />
-        <ReferenceInput
-          source="pin_id"
-          reference="pincode"
-          label="pincode"
-          validate={[required()]}
-          fullWidth
-        >
-          <AutocompleteInput label="Pincode" validate={[required()]}  fullWidth/>
-        </ReferenceInput>
+        <AreaForm />
       </SimpleForm>
     </Edit>
   );

@@ -13,6 +13,8 @@ import {
 } from "react-admin";
 import { useNotify, useRedirect, useRefresh } from "react-admin";
 
+import { CityForm } from "../Create/CreateCity";
+
 export const EditCity = () => {
   // const notify = useNotify();
   // const refresh = useRefresh();
@@ -26,16 +28,7 @@ export const EditCity = () => {
   return (
     <Edit mutationMode="pessimistic">
       <SimpleForm>
-        <TextInput source="name" validate={[required()]} fullWidth />
-        <ReferenceInput
-          source="st_id"
-          reference="state"
-          label="State"
-          validate={[required()]}
-          fullWidth
-        >
-          <AutocompleteInput fullWidth label="State" validate={[required()]} />
-        </ReferenceInput>
+        <CityForm />
       </SimpleForm>
     </Edit>
   );

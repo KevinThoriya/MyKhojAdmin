@@ -13,51 +13,68 @@ import {
   TextInput,
   required,
   useAugmentedForm,
+  useRecordContext,
 } from "react-admin";
+import { Grid, Stack } from "@mui/material";
 
 export const CreateCity = (props: any) => {
+  return (
+    <Create {...props}>
+      <SimpleForm>
+        <CityForm props={props} />
+      </SimpleForm>
+    </Create>
+  );
+};
+
+export const CityForm = (props: any) => {
   const {
     form: { getValues, trigger, control, watch, setValue, resetField, reset },
   } = useAugmentedForm(props);
   const StateRef = React.useRef();
-  console.log(getValues("country_id"));
-  // watch();
-
-  React.useEffect(() => {
-    setValue("country_id", 2);
-  }, []);
+  const record = useRecordContext();
 
   return (
-    <Create {...props}>
-      <SimpleForm>
-        <TextInput source="name" validate={[required()]} fullWidth />
-        <FormDataConsumer>
-          {({ formData, scopedFormData, ...rest }) => (
-            <>
-              {JSON.stringify(formData)}
-              <ReferenceInput
-                source="country_id"
-                reference="country"
-                label="Country"
-                validate={[required()]}
-                key={formData.country_id}
-                onChange={(e) => {
-                  setValue("st_id", "");
-                  reset("st_id");
-                }}
-                fullWidth
-              >
-                <SelectInput
+    <FormDataConsumer>
+      {({ formData, scopedFormData, ...rest }) => (
+        <>
+          <Stack
+            direction={"row"}
+            justifyContent={"space-between"}
+            alignItems="stretch"
+            width={"100%"}
+            gap={2}
+          >
+            <Grid flex={1}>
+              <TextInput source="name" validate={[required()]} fullWidth />
+            </Grid>
+            {!record && (
+              <Grid flex={1}>
+                <ReferenceInput
+                  source="country_id"
+                  reference="country"
                   label="Country"
                   validate={[required()]}
-                  fullWidth
+                  key={formData.country_id}
                   onChange={(e) => {
-                    resetField("st_id");
-                    console.log(StateRef);
+                    setValue("st_id", "");
+                    reset("st_id");
                   }}
-                />
-              </ReferenceInput>
-
+                  fullWidth
+                >
+                  <SelectInput
+                    label="Country"
+                    validate={[required()]}
+                    fullWidth
+                    onChange={(e) => {
+                      resetField("st_id");
+                      console.log(StateRef);
+                    }}
+                  />
+                </ReferenceInput>
+              </Grid>
+            )}
+            <Grid flex={1}>
               <ReferenceInput
                 source="st_id"
                 reference="state"
@@ -80,10 +97,10 @@ export const CreateCity = (props: any) => {
                   fullWidth
                 />
               </ReferenceInput>
-            </>
-          )}
-        </FormDataConsumer>
-      </SimpleForm>
-    </Create>
+            </Grid>
+          </Stack>
+        </>
+      )}
+    </FormDataConsumer>
   );
 };

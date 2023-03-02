@@ -211,7 +211,7 @@ const App = () => {
           create={CreateDesignation}
           edit={EditDesignation}
           icon={PhoneCallbackSharpIcon}
-          recordRepresentation={(record) => `${record.name}`}
+          recordRepresentation={(record) => `${record.des}`}
           options={{
             label: "Designation",
           }}

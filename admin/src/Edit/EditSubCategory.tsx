@@ -14,6 +14,8 @@ import {
 } from "react-admin";
 import { useNotify, useRedirect, useRefresh } from "react-admin";
 
+import { SubCategoryForm } from "../Create/createSubCategory";
+
 export const EditSubCategory = () => {
   // const notify = useNotify();
   // const refresh = useRefresh();
@@ -27,20 +29,7 @@ export const EditSubCategory = () => {
   return (
     <Edit mutationMode="pessimistic">
       <SimpleForm>
-        <TextInput source="name" validate={[required()]} fullWidth />
-        <ReferenceInput
-          source="cat_id"
-          reference="category"
-          label="Category"
-          validate={[required()]}
-          fullWidth
-        >
-          <AutocompleteInput
-            fullWidth
-            label="Category"
-            validate={[required()]}
-          />
-        </ReferenceInput>
+        <SubCategoryForm />
       </SimpleForm>
     </Edit>
   );
